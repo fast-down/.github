@@ -1,41 +1,77 @@
-# fast-down
+<div align="center">
+<h1>fast-down: 高性能多线程下载器</h1>
 
-[![GitHub last commit](https://img.shields.io/github/last-commit/fast-down/core/main)](https://github.com/fast-down/core/commits/main)
-[![Test](https://github.com/fast-down/core/workflows/Test/badge.svg)](https://github.com/fast-down/core/actions)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/fast-down/core/blob/main/LICENSE)
+<h3>极速下载 · 超强重试 · 断点续传 · 增量续传</h3>
 
-`fast-down` **Fastest** concurrent downloader!
+<p>
+   <img src="https://img.shields.io/badge/Build with-Rust-DEA584?style=flat&logo=rust&logoColor=white" alt="Rust">
+   <img src="https://img.shields.io/badge/Arch-x86__64%2C%20x86%2C%20ARM64-blue" alt="Hardware">
+   <img src="https://img.shields.io/badge/OS-Windows%2C%20macOS%2C%20Linux-orange" alt="Hardware">
+   <br>
+   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
+   <img src="https://img.shields.io/github/last-commit/fast-down/gui/main" alt="Last commit">
+   <img src="https://github.com/fast-down/gui/workflows/Test/badge.svg" alt="Test">
+   <img src="https://img.shields.io/crates/v/fast-down-gui.svg" alt="Latest version">
+   <br>
+   <a href="https://fd.s121.top/"><img src="https://img.shields.io/badge/Website-fd.s121.top-blue?style=flat&logo=google-chrome&logoColor=white" alt="Website"></a>
+<a href="https://dc.vacu.top/"><img src="https://img.shields.io/badge/Discord-Online-5865F2.svg?logo=discord&logoColor=white" alt="Discord"></a>
+</p>
 
-- fast-steal: [![Latest version](https://img.shields.io/crates/v/fast-steal.svg)](https://crates.io/crates/fast-steal) [![Documentation](https://docs.rs/fast-steal/badge.svg)](https://docs.rs/fast-steal)
-- fast-pull: [![Latest version](https://img.shields.io/crates/v/fast-pull.svg)](https://crates.io/crates/fast-pull) [![Documentation](https://docs.rs/fast-pull/badge.svg)](https://docs.rs/fast-pull)
-- fast-down: [![Latest version](https://img.shields.io/crates/v/fast-down.svg)](https://crates.io/crates/fast-down) [![Documentation](https://docs.rs/fast-down/badge.svg)](https://docs.rs/fast-down)
+</div>
 
-**[Official Website (Simplified Chinese)](https://fast.s121.top/)**
+<div align="center">
+   <img src="https://fd.s121.top/gui.png" alt="gui 界面">
+   <img src="https://fd.s121.top/cli.png" alt="cli 界面">
+</div>
 
-## Features
+**[访问官网](https://fd.s121.top/)**
 
-1. **⚡️ Fastest Download**  
-   We created [fast-steal](https://github.com/fast-down/fast-steal) With optimized Work Stealing, **1.43 x faster** than NDM.
-2. **🔄 File consistency**  
-   Switching Wi-Fi, Turn Off Wi-Fi, Switch proxies. **We guarantee the consistency**.
-3. **⛓️‍💥 Resuming Downloads**  
-   You can **interrupt** at any time, and **resume downloading** after.
-4. **⛓️‍💥 Incremental Downloads**  
-   1000 more lines server logs? Don't worry, we **only download new lines**.
-5. **💰 Free and open-source**  
-   The code stays free and open-source. Thanks to [share121](https://github.com/share121), [Cyan](https://github.com/CyanChanges) and other fast-down contributors.
-6. **💻 Cross platform**
+## 特性
 
-   | Arch   | Windows       | Linux           | Mac OS          |
-   |--------|---------------|-----------------|-----------------|
-   | 64 bit | [Download][1] | [Download][2]   | [Download][3]   |
-   | 32 bit | [Download][4] | ❌ Not Supported | ❌ Not Supported |
-   | Arm64  | [Download][5] | [Download][6]    | [Download][7]    |
+- **⚡️ 极速下载**  
+  自研 [fast-steal](https://github.com/fast-down/fast-steal) 任务窃取算法，实测下载速度是 NDM 的 **2.43 倍**
+- **🔄 超强重试**  
+  下载时，切换 WiFi、关闭 WiFi、切换代理，都能保证**文件内容正确**
+- **⛓️‍💥 断点续传**  
+  下到一半**随时暂停**，之后还能**继续传输**
+- **⛓️‍💥 增量续传**  
+  服务器日志今天下载完成，明天又多了 1000 行，增量续传功能实现**只传输新增的 1000 行**
+- **💰 开源免费**  
+  所有代码全部公开，由 [share121](https://github.com/share121)、[Cyan](https://github.com/CyanChanges) 与其他贡献者一起维护
+- **💻 跨平台**
 
-[1]: https://github.com/fast-down/cli/releases/latest/download/fast-down-windows-64bit.zip
-[2]: https://github.com/fast-down/cli/releases/latest/download/fast-down-linux-64bit.zip
-[3]: https://github.com/fast-down/cli/releases/latest/download/fast-down-macos-64bit.zip
-[4]: https://github.com/fast-down/cli/releases/latest/download/fast-down-windows-32bit.zip
-[5]: https://github.com/fast-down/cli/releases/latest/download/fast-down-windows-arm64.zip
-[6]: https://github.com/fast-down/cli/releases/latest/download/fast-down-linux-arm64.zip
-[7]: https://github.com/fast-down/cli/releases/latest/download/fast-down-macos-arm64.zip
+## 下载
+
+### 图形化界面
+
+| 架构  | Windows   | Linux     | Mac OS    |
+| ----- | --------- | --------- | --------- |
+| 64 位 | [下载][1] | [下载][2] | [下载][3] |
+| 32 位 | [下载][4] | [下载][8] | ❌ 不支持 |
+| Arm64 | [下载][5] | [下载][6] | [下载][7] |
+
+[1]: https://fast-down-update.s121.top/gui/download/latest/windows/64bit
+[2]: https://fast-down-update.s121.top/gui/download/latest/linux/64bit
+[3]: https://fast-down-update.s121.top/gui/download/latest/macos/64bit
+[4]: https://fast-down-update.s121.top/gui/download/latest/windows/32bit
+[5]: https://fast-down-update.s121.top/gui/download/latest/windows/arm64
+[6]: https://fast-down-update.s121.top/gui/download/latest/linux/arm64
+[7]: https://fast-down-update.s121.top/gui/download/latest/macos/arm64
+[8]: https://fast-down-update.s121.top/gui/download/latest/linux/32bit
+
+### 命令行界面
+
+| 架构  | Windows    | Linux      | Mac OS     |
+| ----- | ---------- | ---------- | ---------- |
+| 64 位 | [下载][11] | [下载][12] | [下载][13] |
+| 32 位 | [下载][14] | [下载][18] | ❌ 不支持  |
+| Arm64 | [下载][15] | [下载][16] | [下载][17] |
+
+[11]: https://fast-down-update.s121.top/cli/download/latest/windows/64bit
+[12]: https://fast-down-update.s121.top/cli/download/latest/linux/64bit
+[13]: https://fast-down-update.s121.top/cli/download/latest/macos/64bit
+[14]: https://fast-down-update.s121.top/cli/download/latest/windows/32bit
+[15]: https://fast-down-update.s121.top/cli/download/latest/windows/arm64
+[16]: https://fast-down-update.s121.top/cli/download/latest/linux/arm64
+[17]: https://fast-down-update.s121.top/cli/download/latest/macos/arm64
+[18]: https://fast-down-update.s121.top/cli/download/latest/linux/32bit
