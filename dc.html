@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>fast-down 社区</title>
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <style>
+            /* ================= 基础重置与通用样式 (兼容 IE11) ================= */
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                min-height: 100vh;
+                background-color: #1a1a1c;
+                /* 径向渐变背景，IE11 支持标准语法 */
+                background: radial-gradient(
+                    circle at bottom center,
+                    #26272b 0%,
+                    #151516 100%
+                );
+                font-family:
+                    -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    "Microsoft YaHei", sans-serif;
+                color: #dcddde;
+                line-height: 1.5;
+            }
+
+            /* 万能 Flex 居中容器 */
+            .page-wrapper {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -ms-flex-align: center;
+                align-items: center;
+                min-height: 100vh;
+                padding: 40px 20px;
+                box-sizing: border-box;
+            }
+
+            /* 主体内容容器：左右布局 */
+            .main-container {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                max-width: 1100px;
+                width: 100%;
+            }
+
+            /* ================= 左侧：信息展示区 ================= */
+            .left-col {
+                -ms-flex: 1;
+                flex: 1;
+                padding-right: 60px;
+            }
+
+            /* 头部：Logo 与标题 */
+            .header {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                margin-bottom: 25px;
+            }
+
+            .logo-box {
+                width: 64px;
+                height: 64px;
+                background-color: #0b0f14;
+                border-radius: 16px;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -ms-flex-align: center;
+                align-items: center;
+                margin-right: 20px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            }
+
+            .title-group h1 {
+                color: #ffffff;
+                font-size: 32px;
+                font-weight: 800;
+                margin: 0 0 10px 0;
+                letter-spacing: 1px;
+            }
+
+            .tags {
+                display: -ms-flexbox;
+                display: flex;
+            }
+
+            .tag {
+                background-color: #35363c;
+                color: #b5b6b8;
+                font-size: 13px;
+                padding: 4px 12px;
+                border-radius: 20px;
+                margin-right: 10px;
+            }
+
+            /* 描述文本 */
+            .description {
+                color: #a3a6aa;
+                font-size: 16px;
+                line-height: 1.8;
+                margin-bottom: 25px;
+            }
+            .description strong {
+                color: #ffffff;
+                font-weight: 600;
+            }
+
+            /* 警告横幅 */
+            .warning-banner {
+                border: 1px solid #7a6021;
+                background-color: rgba(30, 25, 15, 0.4);
+                color: #e2c058;
+                padding: 12px 16px;
+                border-radius: 6px;
+                font-size: 13px;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                margin-bottom: 35px;
+            }
+            .warning-icon {
+                width: 16px;
+                height: 16px;
+                border: 1px solid #e2c058;
+                border-radius: 50%;
+                display: inline-block;
+                text-align: center;
+                line-height: 14px;
+                font-size: 12px;
+                margin-right: 10px;
+            }
+
+            /* 按钮组 */
+            .button-group {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: stretch; /* 让两个按钮等高 */
+                align-items: stretch;
+            }
+
+            .btn-join {
+                background-color: #5865f2;
+                color: #ffffff;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 15px;
+                padding: 0 24px;
+                border-radius: 6px;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                margin-right: 15px;
+                transition: background 0.2s;
+                height: 44px; /* 固定高度兼容IE */
+            }
+            .btn-join:hover {
+                background-color: #4752c4;
+            }
+
+            .btn-stats {
+                display: -ms-flexbox;
+                display: flex;
+                border-radius: 6px;
+                overflow: hidden;
+                height: 44px;
+            }
+            .stat-left {
+                background-color: #5865f2;
+                color: #fff;
+                padding: 0 16px;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                font-size: 13px;
+                font-weight: bold;
+            }
+            .stat-right {
+                background-color: #4f545c;
+                color: #fff;
+                padding: 0 16px;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+            /* 通用 SVG 图标样式 */
+            .icon-svg {
+                fill: currentColor;
+                margin-right: 8px;
+            }
+
+            /* ================= 右侧：卡片展示区 ================= */
+            .right-col {
+                width: 420px;
+                -ms-flex-negative: 0;
+                flex-shrink: 0;
+            }
+
+            .card {
+                background-color: #2b2d31;
+                border: 1px solid #35363c;
+                border-radius: 12px;
+                padding: 24px;
+                margin-bottom: 20px;
+            }
+
+            /* 移除最后一个卡片的底边距 */
+            .card:last-child {
+                margin-bottom: 0;
+            }
+
+            .card-title {
+                color: #ffffff;
+                font-size: 18px;
+                font-weight: bold;
+                margin: 0 0 20px 0;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+            }
+
+            /* 列表项通用样式 */
+            .list-item {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+                background-color: #232428;
+                border: 1px solid #313338;
+                padding: 14px 16px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+            .list-item:last-child {
+                margin-bottom: 0;
+            }
+
+            /* 频道列表特定样式 */
+            .channel-info {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                color: #dbdee1;
+                font-size: 15px;
+                font-weight: bold;
+            }
+            .channel-icon {
+                color: #80848e;
+                margin-right: 12px;
+                font-size: 18px;
+                font-weight: normal;
+            }
+            .channel-desc {
+                color: #80848e;
+                font-size: 12px;
+            }
+
+            /* 管理员列表特定样式 */
+            .admin-item {
+                background-color: transparent; /* 管理员列表没有深色底框 */
+                border: none;
+                padding: 8px 0;
+                border-bottom: 1px solid #35363c;
+                border-radius: 0;
+            }
+            .admin-item:last-child {
+                border-bottom: none;
+            }
+
+            .user-info {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+            }
+
+            .avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 15px;
+                background-color: #4f545c; /* 占位色 */
+                background-size: cover;
+                background-position: center;
+            }
+            /* 模拟头像图片 */
+            .avatar-1 {
+                background-image: radial-gradient(circle, #ff9a00, #ff5200);
+            }
+            .avatar-2 {
+                background-image: radial-gradient(circle, #ffffff, #e0e0e0);
+            }
+
+            .user-details {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-direction: column;
+                flex-direction: column;
+            }
+            .user-name {
+                color: #ffffff;
+                font-size: 15px;
+                font-weight: bold;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+            }
+            .user-title {
+                color: #949ba4;
+                font-size: 12px;
+                margin-top: 2px;
+            }
+
+            .badge {
+                margin-left: 6px;
+                width: 14px;
+                height: 14px;
+            }
+
+            /* 在线状态绿点 */
+            .status-dot {
+                width: 10px;
+                height: 10px;
+                background-color: #23a559;
+                border-radius: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <div class="main-container">
+                <!-- 左侧：文本与操作 -->
+                <div class="left-col">
+                    <div class="header">
+                        <img
+                            class="logo-box"
+                            width="58"
+                            height="58"
+                            src="icon.png"
+                            alt="fast-down"
+                        />
+                        <div class="title-group">
+                            <h1>fast-down 社区</h1>
+                            <div class="tags">
+                                <span class="tag">实时交流</span>
+                                <span class="tag">问题反馈</span>
+                                <span class="tag">功能建议</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="description">
+                        欢迎来到 <strong>fast-down</strong> 社区🎉<br />
+                        在这里能与
+                        <strong>开发者</strong>
+                        实时交流，反馈问题，提出建议。<br />
+                        加入我们，一起打造更好的 fast-down！
+                    </div>
+
+                    <div class="warning-banner">
+                        <span class="warning-icon">i</span>
+                        访问 Discord
+                        需要合适的网络环境，如遇无法访问请检查网络设置或百度一下
+                    </div>
+
+                    <div class="button-group">
+                        <a
+                            href="https://discord.gg/a3Y73xQeGb"
+                            class="btn-join"
+                        >
+                            <!-- Discord 图标 SVG -->
+                            <svg
+                                class="icon-svg"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3333-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3333-.946 2.4189-2.1568 2.4189z"
+                                />
+                            </svg>
+                            立即加入服务器
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 右侧：卡片区 -->
+                <div class="right-col">
+                    <!-- 卡片 1：热门频道 -->
+                    <div class="card">
+                        <div class="card-title">
+                            <span class="channel-icon">#</span> 热门频道
+                        </div>
+                        <div class="list-item">
+                            <div class="channel-info">
+                                <span class="channel-icon">#</span>
+                                问题反馈-功能建议
+                            </div>
+                            <div class="channel-desc">搜索问题 & 反馈问题</div>
+                        </div>
+                        <div class="list-item">
+                            <div class="channel-info">
+                                <span class="channel-icon">#</span> 实时交流
+                            </div>
+                            <div class="channel-desc">与开发者实时交流</div>
+                        </div>
+                        <div class="list-item">
+                            <div class="channel-info">
+                                <span class="channel-icon">#</span> 公告
+                            </div>
+                            <div class="channel-desc">fast-down 新版发布</div>
+                        </div>
+                        <div class="list-item">
+                            <div class="channel-info">
+                                <span class="channel-icon">#</span> 规则
+                            </div>
+                            <div class="channel-desc">服务器规则</div>
+                        </div>
+                    </div>
+
+                    <!-- 卡片 2：管理团队 -->
+                    <div class="card">
+                        <div class="card-title">
+                            <svg
+                                class="icon-svg"
+                                style="color: #80848e"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path
+                                    d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                                ></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            管理团队
+                        </div>
+
+                        <!-- 管理员 1 -->
+                        <div class="list-item admin-item">
+                            <div class="user-info">
+                                <img
+                                    class="avatar"
+                                    src="share121.png"
+                                    alt="share121 avatar"
+                                />
+                                <div class="user-details">
+                                    <div class="user-name">
+                                        share121 小派蒙
+                                        <!-- 皇冠 SVG -->
+                                        <svg
+                                            class="badge"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="#f1c40f"
+                                            stroke-width="2"
+                                        >
+                                            <path
+                                                d="M2 20h20M5 16l-3-9 5 2 5-6 5 6 5-2-3 9H5z"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div class="user-title">服务器所有者</div>
+                                </div>
+                            </div>
+                            <div class="status-dot"></div>
+                        </div>
+
+                        <!-- 管理员 2 -->
+                        <div class="list-item admin-item">
+                            <div class="user-info">
+                                <img
+                                    class="avatar"
+                                    src="lfcypo.png"
+                                    alt="lfcypo avatar"
+                                />
+                                <div class="user-details">
+                                    <div class="user-name">
+                                        lfcypo
+                                        <!-- 盾牌 SVG -->
+                                        <svg
+                                            class="badge"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="#3498db"
+                                            stroke-width="2"
+                                        >
+                                            <path
+                                                d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div class="user-title">社区管理员</div>
+                                </div>
+                            </div>
+                            <div class="status-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
