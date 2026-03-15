@@ -7,7 +7,6 @@
         <title>fast-down 社区</title>
         <link rel="icon" href="favicon.ico" type="image/x-icon" />
         <style>
-            /* ================= 基础重置与通用样式 (兼容 IE11) ================= */
             html,
             body {
                 margin: 0;
@@ -15,12 +14,6 @@
                 width: 100%;
                 min-height: 100vh;
                 background-color: #1a1a1c;
-                /* 径向渐变背景，IE11 支持标准语法 */
-                background: radial-gradient(
-                    circle at bottom center,
-                    #26272b 0%,
-                    #151516 100%
-                );
                 font-family:
                     -apple-system, BlinkMacSystemFont, "Segoe UI",
                     "Microsoft YaHei", sans-serif;
@@ -28,7 +21,6 @@
                 line-height: 1.5;
             }
 
-            /* 万能 Flex 居中容器 */
             .page-wrapper {
                 display: -ms-flexbox;
                 display: flex;
@@ -170,36 +162,6 @@
                 background-color: #4752c4;
             }
 
-            .btn-stats {
-                display: -ms-flexbox;
-                display: flex;
-                border-radius: 6px;
-                overflow: hidden;
-                height: 44px;
-            }
-            .stat-left {
-                background-color: #5865f2;
-                color: #fff;
-                padding: 0 16px;
-                display: -ms-flexbox;
-                display: flex;
-                -ms-flex-align: center;
-                align-items: center;
-                font-size: 13px;
-                font-weight: bold;
-            }
-            .stat-right {
-                background-color: #4f545c;
-                color: #fff;
-                padding: 0 16px;
-                display: -ms-flexbox;
-                display: flex;
-                -ms-flex-align: center;
-                align-items: center;
-                font-size: 12px;
-                font-weight: bold;
-            }
-
             /* 通用 SVG 图标样式 */
             .icon-svg {
                 fill: currentColor;
@@ -278,7 +240,7 @@
 
             /* 管理员列表特定样式 */
             .admin-item {
-                background-color: transparent; /* 管理员列表没有深色底框 */
+                background-color: transparent !important; /* 管理员列表没有深色底框 */
                 border: none;
                 padding: 8px 0;
                 border-bottom: 1px solid #35363c;
@@ -303,13 +265,6 @@
                 background-color: #4f545c; /* 占位色 */
                 background-size: cover;
                 background-position: center;
-            }
-            /* 模拟头像图片 */
-            .avatar-1 {
-                background-image: radial-gradient(circle, #ff9a00, #ff5200);
-            }
-            .avatar-2 {
-                background-image: radial-gradient(circle, #ffffff, #e0e0e0);
             }
 
             .user-details {
@@ -345,6 +300,78 @@
                 height: 10px;
                 background-color: #23a559;
                 border-radius: 50%;
+            }
+
+            /* 响应式布局：适配移动端 */
+            @media (max-width: 850px) {
+                .main-container {
+                    -ms-flex-direction: column;
+                    flex-direction: column;
+                }
+                .left-col {
+                    padding-right: 0;
+                    margin-bottom: 40px;
+                    width: 100%;
+                }
+                .right-col {
+                    width: 100%;
+                }
+                .button-group {
+                    -ms-flex-wrap: wrap;
+                    flex-wrap: wrap;
+                }
+                .btn-join {
+                    margin-bottom: 10px;
+                }
+            }
+
+            /* 适配操作系统的亮色模式 */
+            @media (prefers-color-scheme: light) {
+                html,
+                body {
+                    background-color: #f2f3f5;
+                    background: #f5f5f5;
+                    color: #313338;
+                }
+                .logo-box {
+                    background-color: #ffffff;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+                }
+                .title-group h1,
+                .description strong,
+                .card-title,
+                .user-name {
+                    color: #060607;
+                }
+                .tag {
+                    background-color: #e3e5e8;
+                    color: #4e5058;
+                }
+                .description {
+                    color: #4e5058;
+                }
+                .warning-banner {
+                    background-color: #fff8e6;
+                    border-color: #f1c40f;
+                    color: #b7950b;
+                }
+                .card {
+                    background-color: #ffffff;
+                    border-color: #ebedef;
+                }
+                .list-item {
+                    background-color: #f2f3f5;
+                    border-color: #ebedef;
+                }
+                .channel-info {
+                    color: #313338;
+                }
+                .user-title {
+                    color: #5c5e66;
+                }
+                .admin-item {
+                    border-bottom-color: #ebedef;
+                }
             }
         </style>
     </head>
@@ -416,6 +443,18 @@
                         </div>
                         <div class="list-item">
                             <div class="channel-info">
+                                <span class="channel-icon">#</span> 规则
+                            </div>
+                            <div class="channel-desc">服务器规则</div>
+                        </div>
+                        <div class="list-item">
+                            <div class="channel-info">
+                                <span class="channel-icon">#</span> 公告
+                            </div>
+                            <div class="channel-desc">fast-down 新版发布</div>
+                        </div>
+                        <div class="list-item">
+                            <div class="channel-info">
                                 <span class="channel-icon">#</span>
                                 问题反馈-功能建议
                             </div>
@@ -426,18 +465,6 @@
                                 <span class="channel-icon">#</span> 实时交流
                             </div>
                             <div class="channel-desc">与开发者实时交流</div>
-                        </div>
-                        <div class="list-item">
-                            <div class="channel-info">
-                                <span class="channel-icon">#</span> 公告
-                            </div>
-                            <div class="channel-desc">fast-down 新版发布</div>
-                        </div>
-                        <div class="list-item">
-                            <div class="channel-info">
-                                <span class="channel-icon">#</span> 规则
-                            </div>
-                            <div class="channel-desc">服务器规则</div>
                         </div>
                     </div>
 
