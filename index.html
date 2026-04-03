@@ -11,6 +11,7 @@
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
+                scroll-behavior: smooth;
             }
             body {
                 font-family:
@@ -29,6 +30,10 @@
             a:hover {
                 opacity: 0.8;
                 text-decoration: underline;
+            }
+
+            .github-link {
+                color: #2997ff !important;
             }
 
             .container {
@@ -655,6 +660,11 @@
             /* =========================================
            响应式适配
            ========================================= */
+            @media (max-width: 580px) {
+                .nav-links {
+                    display: none;
+                }
+            }
             @media (max-width: 900px) {
                 .hero-title {
                     font-size: 48px;
@@ -683,9 +693,6 @@
                     -webkit-box-flex: 0;
                     -ms-flex: 0 0 100%;
                     flex: 0 0 100%;
-                }
-                .nav-links {
-                    display: none;
                 }
                 .dl-link-group {
                     flex-direction: column;
@@ -787,6 +794,7 @@
                 .btn-outline:hover,
                 .dl-pill:hover {
                     background-color: #f0f0f0;
+                    color: #000;
                     border-color: #999;
                 }
                 .dl-pill.primary {
@@ -840,9 +848,10 @@
                     <a href="dc.html" class="discord-link" target="_blank"
                         >Discord</a
                     >
-                </div>
-                <div style="font-size: 12px; font-weight: 600">
-                    <a href="https://github.com/fast-down" target="_blank"
+                    <a
+                        href="https://github.com/fast-down"
+                        target="_blank"
+                        class="github-link"
                         >Github</a
                     >
                 </div>
@@ -1023,7 +1032,7 @@
                         <table class="dl-table">
                             <thead>
                                 <tr>
-                                    <th>架构 (Arch)</th>
+                                    <th>架构</th>
                                     <th>Windows</th>
                                     <th>Linux</th>
                                     <th>macOS</th>
@@ -1031,7 +1040,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>64 位</strong> (x86_64)</td>
+                                    <td><strong>x86_64</strong></td>
                                     <td>
                                         <div class="dl-link-group">
                                             <a
@@ -1076,7 +1085,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>32 位</strong> (x86)</td>
+                                    <td><strong>x86</strong></td>
                                     <td>
                                         <div class="dl-link-group">
                                             <a
@@ -1113,7 +1122,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>ARM64</strong> (aarch64)</td>
+                                    <td><strong>aarch64</strong></td>
                                     <td>
                                         <div class="dl-link-group">
                                             <a
