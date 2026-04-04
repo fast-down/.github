@@ -486,6 +486,7 @@
                 color: #d1d1d1;
                 overflow-x: auto;
                 margin-bottom: 24px;
+                word-break: break-all;
             }
             .cmd-box .prompt {
                 color: #50fa7b;
@@ -528,12 +529,7 @@
             }
 
             .dl-link-group {
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-pack: center;
-                -ms-flex-pack: center;
-                justify-content: center;
+                white-space: nowrap;
             }
             .dl-link-group > a:first-child {
                 margin-right: 6px;
@@ -607,6 +603,7 @@
             }
             .dev-item {
                 padding: 12px;
+                overflow: hidden;
             }
             .dev-item-full {
                 -webkit-box-flex: 0;
@@ -646,6 +643,11 @@
                 line-height: 1.6;
                 color: #d1d1d1;
                 overflow-x: auto;
+                white-space: nowrap;
+            }
+            .code-block > div {
+                display: table;
+                min-width: 100%;
             }
             .kw {
                 color: #ff79c6;
@@ -660,8 +662,18 @@
             /* =========================================
            响应式适配
            ========================================= */
-            @media (max-width: 580px) {
+            @media (max-width: 256px) {
                 .nav-links {
+                    display: none;
+                }
+            }
+            @media (max-width: 340px) {
+                .nav-links .discord-link {
+                    display: none;
+                }
+            }
+            @media (max-width: 580px) {
+                .nav-links .menu {
                     display: none;
                 }
             }
@@ -841,10 +853,10 @@
                     fast-down
                 </div>
                 <div class="nav-links">
-                    <a href="#benchmark">跑分</a>
-                    <a href="#apps">软件</a>
-                    <a href="#install">安装</a>
-                    <a href="#dev">SDK</a>
+                    <a class="menu" href="#benchmark">跑分</a>
+                    <a class="menu" href="#apps">软件</a>
+                    <a class="menu" href="#install">安装</a>
+                    <a class="menu" href="#dev">SDK</a>
                     <a href="dc.html" class="discord-link" target="_blank"
                         >Discord</a
                     >
@@ -1331,28 +1343,32 @@
                             </p>
                             <div class="code-block">
                                 <div>
-                                    <span class="kw">- name:</span> Setup
-                                    fast-down
-                                </div>
-                                <div>
-                                    &nbsp;&nbsp;&nbsp;<span class="kw"
-                                        >uses:</span
-                                    >
-                                    <span class="str">fast-down/action@v1</span>
-                                </div>
-                                <br />
-                                <div>
-                                    <span class="kw">- name:</span> Download
-                                    Dataset
-                                </div>
-                                <div>
-                                    &nbsp;&nbsp;&nbsp;<span class="kw"
-                                        >run:</span
-                                    >
-                                    <span class="fn">fd</span>
-                                    <span class="str"
-                                        >"https://storage.example.com/dataset.zip"</span
-                                    >
+                                    <div>
+                                        <span class="kw">- name:</span> Setup
+                                        fast-down
+                                    </div>
+                                    <div>
+                                        &nbsp;&nbsp;&nbsp;<span class="kw"
+                                            >uses:</span
+                                        >
+                                        <span class="str"
+                                            >fast-down/action@v1</span
+                                        >
+                                    </div>
+                                    <br />
+                                    <div>
+                                        <span class="kw">- name:</span> Download
+                                        Dataset
+                                    </div>
+                                    <div>
+                                        &nbsp;&nbsp;&nbsp;<span class="kw"
+                                            >run:</span
+                                        >
+                                        <span class="fn">fd</span>
+                                        <span class="str"
+                                            >"https://storage.example.com/dataset.zip"</span
+                                        >
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1375,24 +1391,28 @@
                             </p>
                             <div class="code-block">
                                 <div>
-                                    <span class="kw">import</span> { prefetch }
-                                    <span class="kw">from</span>
-                                    <span class="str"
-                                        >'@fast-down/fast-down'</span
-                                    >;
-                                </div>
-                                <br />
-                                <div>
-                                    <span class="kw">const</span> task =
-                                    <span class="kw">await</span>
-                                    <span class="fn">prefetch</span>(url);
-                                </div>
-                                <div>
-                                    <span class="kw">await</span> task.<span
-                                        class="fn"
-                                        >start</span
-                                    >(task.info.<span class="fn">filename</span
-                                    >());
+                                    <div>
+                                        <span class="kw">import</span> {
+                                        prefetch }
+                                        <span class="kw">from</span>
+                                        <span class="str"
+                                            >'@fast-down/fast-down'</span
+                                        >;
+                                    </div>
+                                    <br />
+                                    <div>
+                                        <span class="kw">const</span> task =
+                                        <span class="kw">await</span>
+                                        <span class="fn">prefetch</span>(url);
+                                    </div>
+                                    <div>
+                                        <span class="kw">await</span> task.<span
+                                            class="fn"
+                                            >start</span
+                                        >(task.info.<span class="fn"
+                                            >filename</span
+                                        >());
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1415,21 +1435,23 @@
                             </p>
                             <div class="code-block">
                                 <div>
-                                    <span class="kw">import</span> fastdown
-                                </div>
-                                <br />
-                                <div>
-                                    task =
-                                    <span class="kw">await</span> fastdown.<span
-                                        class="fn"
-                                        >prefetch</span
-                                    >(url)
-                                </div>
-                                <div>
-                                    <span class="kw">await</span>
-                                    task.<span class="fn">start</span
-                                    >(task.info.<span class="fn">filename</span
-                                    >())
+                                    <div>
+                                        <span class="kw">import</span> fastdown
+                                    </div>
+                                    <br />
+                                    <div>
+                                        task =
+                                        <span class="kw">await</span>
+                                        fastdown.<span class="fn">prefetch</span
+                                        >(url)
+                                    </div>
+                                    <div>
+                                        <span class="kw">await</span>
+                                        task.<span class="fn">start</span
+                                        >(task.info.<span class="fn"
+                                            >filename</span
+                                        >())
+                                    </div>
                                 </div>
                             </div>
                         </div>
